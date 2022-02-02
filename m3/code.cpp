@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define MAX_PROVIDERS 10000
+#define MAX_PROVIDERS 100000
 
 typedef vector<int> vi;
 typedef pair<int, int> pair_ints;
@@ -55,10 +55,6 @@ int main() {
         sort(routes.begin(), routes.end(), decreasing);
         sort(providers.begin(), providers.end(), cheaper_n_bigger);
 
-        for(auto p: providers) {
-            cout << p.first << " " << p.second << endl;
-        }
-
         for(int w : routes) {
             int pos = 0;
             while(!impossible) {
@@ -68,7 +64,6 @@ int main() {
             if (impossible) break;
             used[pos].flip();
             res += providers[pos].first;
-            cout <<w << " "<< providers[pos].first << " " << providers[pos].second << endl;
         }
 
         if(impossible) cout << "Imposible" << endl;
