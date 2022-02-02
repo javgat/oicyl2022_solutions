@@ -43,7 +43,7 @@ int main() {
     int delivered = 0;
     int max_priority, index, current_priority;
     bool end = false;
-    while (delivered < N) {
+    while (delivered < N && current_day <= 30) {
         for (int i = 0; i < 10; i++) {
             max_priority = -1;
             index = -1;
