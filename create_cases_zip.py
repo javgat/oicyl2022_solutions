@@ -10,13 +10,15 @@ def main():
     outputs = os.listdir(dirname+"/outputs")
     inputs.sort()
     outputs.sort()
+    os.mkdir(destfolder+"/input")
+    os.mkdir(destfolder+"/output")
     for i in range(len(inputs)):
         src = dirname+"/inputs/"+inputs[i]
-        dst = destfolder+"/input"+"{:02d}".format(i)+".txt"
+        dst = destfolder+"/input/input"+"{:02d}".format(i)+".txt"
         shutil.copy2(src, dst)
     for i in range(len(outputs)):
         src = dirname+"/outputs/"+outputs[i]
-        dst = destfolder+"/output"+"{:02d}".format(i)+".txt"
+        dst = destfolder+"/output/output"+"{:02d}".format(i)+".txt"
         shutil.copy2(src, dst)
 
 if __name__ == "__main__":
