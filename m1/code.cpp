@@ -38,13 +38,12 @@ int main() {
         q_orders[C].push_back(make_pair(D, id));
     }
     for (int i = 0; i < 6; i++) {
-        sort(q_orders[i].begin(), q_orders[i].end(), earlier_back);
+        stable_sort(q_orders[i].begin(), q_orders[i].end(), earlier_back);
     }
-
     int delivered = 0;
     int max_priority, index, current_priority;
     bool end = false;
-    while (delivered < N) {
+    while (delivered < N && current_day <= 30) {
         for (int i = 0; i < 10; i++) {
             max_priority = -1;
             index = -1;

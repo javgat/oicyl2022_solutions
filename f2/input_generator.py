@@ -1,4 +1,3 @@
-from lib2to3.pgen2 import literals
 from random import randint
 
 num_vehicles = randint(1, 10e5)

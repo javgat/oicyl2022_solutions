@@ -1,4 +1,3 @@
-from lib2to3.pgen2 import literals
 from random import randint
 
 num_pedidos = randint(1, 10e4)
