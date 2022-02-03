@@ -16,7 +16,5 @@ for dia in range(1,31):
         ids.add(id)
         pedidos.append(f"{importancia} {id} {dia} {'P' if randint(1,10) >= 7 else 'N'}")
 
-shuffle(pedidos)
-
 print(len(pedidos))
 print(*pedidos, sep='\n')
