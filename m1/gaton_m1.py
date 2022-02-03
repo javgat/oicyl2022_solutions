@@ -26,13 +26,14 @@ def main():
             print(peds_dia[i][2])
         if num_peds_dia > 10:
             new_dia = dia+1
-            if new_dia not in dias:
-                position = dias.index(dia) + 1
-                dias.insert(position, new_dia)
-                peds[new_dia] = []
-            for i in range(10, num_peds_dia):
-                ped = peds_dia[i]
-                peds[new_dia].append((ped[0]+1, ped[1], ped[2]))
+            if new_dia <= 30:
+                if new_dia not in dias:
+                    position = dias.index(dia) + 1
+                    dias.insert(position, new_dia)
+                    peds[new_dia] = []
+                for i in range(10, num_peds_dia):
+                    ped = peds_dia[i]
+                    peds[new_dia].append((ped[0]+1, ped[1], ped[2]))
 
 if __name__ == "__main__":
     main()
