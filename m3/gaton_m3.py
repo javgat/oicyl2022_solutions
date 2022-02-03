@@ -12,7 +12,7 @@ def main():
     for _ in range(num_rutas):
         ruta = int(input())
         rutas.append(ruta)
-    rutas.sort()
+    rutas.sort(reverse=True)
     for _ in range(num_repartidores):
         rep_split = input().split()
         repartidor = (int(rep_split[0]), int(rep_split[1]))
