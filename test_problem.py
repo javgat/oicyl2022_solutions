@@ -27,7 +27,7 @@ else: exec_file = argv[3]
 exec_file = Path(exec_file)
 
 def compile(file: Path):
-    process = Popen(['g++', '-std=c++11', file], stderr=PIPE)
+    process = Popen(['g++', '-std=c++11', '-O2', file], stderr=PIPE)
     _, stderr = process.communicate()
     if process.returncode != 0:
         raise Exception(f"can't compile {file}\n{stderr}")
@@ -54,7 +54,7 @@ for test_case in find_test_cases():
         exit(0)
     else:
         number = re.findall(r'(\d+).txt', test_case)[0]
-        print(f'outputs/o{number}.txt')
-        with open(f'outputs/o{number}.txt', 'wb') as f:
+        print(f'outputs/o2{number}.txt')
+        with open(f'outputs/o2{number}.txt', 'wb') as f:
             f.write(stdout)
         print(stdout.decode('utf-8'),end='---\n')
