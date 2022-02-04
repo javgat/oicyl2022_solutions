@@ -27,23 +27,22 @@ def main():
     while cambio:
         cambio = False
         for i in range(len(clients_prods)):
-            if clients_ricos[i] == -1:
-                for j in range(len(clients_prods)):
-                    if clients_ricos[j] != -1:
-                        conecta = False
-                        prods_base = clients_prods[i]
-                        prods_other = clients_prods[j]
-                        for p_base in prods_base:
-                            for p_other in prods_other:
-                                if p_base == p_other:
-                                    conecta = True
-                                    cambio = True
-                                    clients_ricos[i] = clients_ricos[j] + 1
-                                    break
-                            if conecta:
+            for j in range(len(clients_prods)):
+                if clients_ricos[j] != -1 and (clients_ricos[i] == -1 or clients_ricos[i] > (clients_ricos[j] + 1)):
+                    conecta = False
+                    prods_base = clients_prods[i]
+                    prods_other = clients_prods[j]
+                    for p_base in prods_base:
+                        for p_other in prods_other:
+                            if p_base == p_other:
+                                conecta = True
+                                cambio = True
+                                clients_ricos[i] = clients_ricos[j] + 1
                                 break
                         if conecta:
                             break
+                    if conecta:
+                        break
     for res in clients_ricos:
         print(res)
 
