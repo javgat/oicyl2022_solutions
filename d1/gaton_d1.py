@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Esta implementacion es INEFICIENTE, sirve para comprobar que algunas tardarían demasiado en hackerrank
 
 def main():
     # input
