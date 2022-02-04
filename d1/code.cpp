@@ -47,17 +47,15 @@ void dijkstra(int start) {
     distances[start] = 0;
     priority_queue<pair<int, int>> pq;
     pq.push(make_pair(0, start));
-    while (true) {
-
+    visited[start] = 1;
+    while (!pq.empty()) {
         int node = pq.top().second;
         pq.pop();
-        
-        if(node == -1) break;
 
-        visited[node] = 1;
         for (int n : adj_list[node]) {
-            if (!visited[n] && distances[n] <= distances[node] + 1) {
+            if (!visited[n] && distances[node] + 1 <= distances[n]) {
                 distances[n] = distances[node] + 1;
+                visited[n] = 1;
                 pq.push(make_pair(-distances[n], n));
             }
         }
