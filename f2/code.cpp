@@ -4,7 +4,7 @@ using namespace std;
 
 int main(){
 
-    double gas_price = 1.59;
+    double gas_price = 170;
     int kms, consumption;
 
     long long int res = 0;
@@ -12,7 +12,7 @@ int main(){
         res += kms * consumption; 
     }
 
-    res = (long long int) res * 1.59 / 100.0;
+    res = (long long int) res * gas_price / 100.0;
     cout << res << endl;    
 
     return 0;
