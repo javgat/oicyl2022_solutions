@@ -45,20 +45,21 @@ void read_input() {
 
 void dijkstra(int start) {
     distances[start] = 0;
+    priority_queue<pair<int, int>> pq;
+    pq.push(make_pair(0, start));
     while (true) {
-        int dmin = INF, node = -1;
-        for (int i = 0; i < adj_list.size(); i++) {
-            if (!visited[i] && distances[i] < dmin) {
-                dmin = distances[i];
-                node = i;
-            }
-        }
+
+        int node = pq.top().second;
+        pq.pop();
         
         if(node == -1) break;
 
         visited[node] = 1;
         for (int n : adj_list[node]) {
-            distances[n] = min(distances[n], distances[node] + 1);
+            if (!visited[n] && distances[n] <= distances[node] + 1) {
+                distances[n] = distances[node] + 1;
+                pq.push(make_pair(-distances[n], n));
+            }
         }
     } 
 }
