@@ -23,7 +23,7 @@ print(n_productos_ertres)
 unique_seq = uniqueid()
 for i in range(n_productos_ertres):
     print(next(unique_seq))
-num_clients = randint(1,500)
+num_clients = randint(1,1000)
 print(num_clients)
 for i in range(num_clients):
     n_prod_client = randint(1,1000)
