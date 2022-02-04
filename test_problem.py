@@ -54,7 +54,7 @@ for test_case in find_test_cases():
         exit(0)
     else:
         number = re.findall(r'(\d+).txt', test_case)[0]
-        print(f'outputs/o2{number}.txt')
-        with open(f'outputs/o2{number}.txt', 'wb') as f:
+        print(f'outputs/o{number}.txt')
+        with open(f'outputs/o{number}.txt', 'wb') as f:
             f.write(stdout)
         print(stdout.decode('utf-8'),end='---\n')
