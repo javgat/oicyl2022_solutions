@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from random import randint
 
-cap_camion = randint(1,1000000)
+cap_camion = randint(1,100000)
 print(cap_camion)
-n_paqs = randint(1,10000)
+n_paqs = randint(1,1000)
 print(n_paqs)
 for i in range(n_paqs):
     peso = randint(1,10000)
