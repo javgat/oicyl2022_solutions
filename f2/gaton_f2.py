@@ -4,7 +4,7 @@ import sys
 import math
 
 def main():
-    precio = 1.59
+    precio = 170
     consumo = 0
     for line in sys.stdin:
         linea_splitted = line.split()
@@ -12,8 +12,7 @@ def main():
         consumo_100 = int(linea_splitted[1])
         consumo = consumo + consumo_100 * kms/100
     consumo = consumo * precio
-    consumo = math.ceil(consumo)
-    print(consumo)
+    print(int(consumo))
 
 
 if __name__ == "__main__":
