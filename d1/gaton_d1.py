@@ -1,42 +1,30 @@
 #!/usr/bin/env python3
 
 from math import inf as INF
+import heapq
 from typing import List, Set, Dict
 
-def dijkstra_to_all(vecinos: List[Dict[int, int]], source_index: int) -> List[int]:
-    distances: List[int] = [INF for _ in range(len(vecinos))]
-    distances[source_index] = 0
-    for target in range(len(vecinos)):
-        visited: Set = {}
-        visited.add(source_index)
-        iter_source = source_index
-        min_peso = INF
-        chosen_vecino = -1
-        prev_peso = 0
-        for _ in range((len(vecinos))):
-            for vecino in vecinos[iter_source]:
-                peso = vecinos[iter_source][vecino]
-                if peso < min_peso:
-                    min_peso = peso
-                    chosen_vecino = vecino
-            if min_peso+prev_peso < distances[chosen_vecino]:
-                prev_peso = min_peso + prev_peso
-                distances[vecino] = prev_peso
-            else:
-                prev_peso = distances[vecino]
-            visited.add(chosen_vecino)
-            hay_libre = False
-            if vecinos[chosen_vecino]:
-                for vecino in vecinos[chosen_vecino]:
-                    if vecino not in visited:
-                        hay_libre = True
-                        break
-            if hay_libre:
-                iter_source = chosen_vecino
-            else:
-                pass
 
-    
+def dijkstra(graph, dists: List[int]):
+    visited = [False for _ in range(len(graph))]
+    pq = [(0, root) for root in range(1, len(dists))]
+    # while there are nodes to process
+    while len(pq) > 0:
+        # get the root, discard current distance
+        _, u = heapq.heappop(pq)
+        # if the node is visited, skip
+        if visited[u]:
+            continue
+        # set the node to visited
+        visited[u] = True
+        # check the distance and node and distance
+        for v, l in enumerate(graph[u]):
+            # if the current node's distance + distance to the node we're visiting
+            # is less than the distance of the node we're visiting on file
+            # replace that distance and push the node we're visiting into the priority queue
+            if dists[u] + l < dists[v]:
+                dists[v] = dists[u] + l
+                heapq.heappush(pq, (dists[v], v))
 
 
 def make_bidirectional(gr: List[List[int]]) -> List[List[int]]:
@@ -46,14 +34,9 @@ def make_bidirectional(gr: List[List[int]]) -> List[List[int]]:
                 gr[j][i] = gr[i][j]
     return gr
 
-def getShortestP(gr: List[List[int]], g: int, p_index: List[int]) -> int:
-    p_g = [elem for i, elem in enumerate(gr[g]) if i in p_index]
-    return min(p_g)
-
-def get_initial_graph(clients_prods: List[List[str]]) -> List[List[int]]:
-    grafo: List[List[int]] = []
+def get_initial_graph(clients_prods: List[Set[str]]) -> List[List[int]]:
+    grafo: List[List[int]] = [[] for _ in clients_prods]
     for i, cp in enumerate(clients_prods):
-        grafo.append([])
         for j, cp2 in enumerate(clients_prods):
             linked = False
             if i == j:
@@ -66,16 +49,13 @@ def get_initial_graph(clients_prods: List[List[str]]) -> List[List[int]]:
                     break
             if not linked:
                 grafo[i].append(INF)
-    return grafo
+    return make_bidirectional(grafo)
 
-def get_vecinos(grafo: List[List[int]]) -> List[Dict[int, int]]:
-    vecinos: List[Dict[int, int]] = []
-    for i, elem in enumerate(grafo):
-        vecinos.append({})
-        for j, peso in enumerate(elem):
-            if peso < INF:
-                vecinos[i][j] = peso
-    return vecinos
+def get_initial_distances(grafo: List[List[int]]) -> List[int]:
+    dists = []
+    for peso in grafo[0]:
+        dists.append(peso)
+    return dists
 
 def main():
     # input
@@ -84,22 +64,20 @@ def main():
     for _ in range(tot_rico):
         rico_prods.append(input())
     num_clients = int(input())
-    clients_prods: List[List[str]] = []
+    clients_prods: List[Set[str]] = []
     for _ in range(num_clients):
         num_prods = int(input())
-        prods: List[str] = []
+        prods: Set[str] = set()
         for _ in range(num_prods):
-            prods.append(input())
+            prods.add(input())
         clients_prods.append(prods)
 
     clients_prods.insert(0, rico_prods)
     grafo: List[List[int]] = get_initial_graph(clients_prods)
-    grafo = make_bidirectional(grafo)
-    vecinos: List[Dict[int, int]] = get_vecinos(grafo)
-
-    clients_ricos: List[int] = [elem[0] for elem in grafo]
-    clients_ricos.pop(0)
-    for res in clients_ricos:
+    dists = get_initial_distances(grafo)
+    dijkstra(grafo, dists)
+    dists.pop(0)
+    for res in dists:
         if res == INF:
             print(-1)
         else:
