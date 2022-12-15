@@ -2,7 +2,7 @@
 
 from math import inf as INF
 import heapq
-from typing import List, Set, Dict
+from typing import List, Set
 
 
 def dijkstra(graph, dists: List[int]):

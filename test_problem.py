@@ -18,7 +18,7 @@ else: exec_code_of = argv[2]
 
 default_file = ""
 if exec_code_of == "diego": default_file = "code.cpp"
-elif exec_code_of == "gaton": default_file = f"gaton_{folder}.py"
+elif exec_code_of == "gaton": default_file = f"code.py"
 else: raise NotImplementedError
 
 if len(argv) < 4: exec_file = default_file
